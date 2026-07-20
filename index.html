@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Micheladas And Mariscos El Doctor - Auténtica comida mexicana, mariscos frescos y las mejores micheladas tropicales.">
+    <title>Micheladas And Mariscos El Doctor | Tropical Seafood & Micheladas</title>
+    
+    <link rel="icon" id="favicon" type="image/png" href="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1784407420/MicheladasyMariscosElDoctorLOGO_1_r0whxd.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --c-shrimp: #FF5E3A;       
+            --c-shrimp-dark: #E04320;  
+            --c-salsa: #D83131;        
+            --c-lime: #A8E063;         
+            --c-dark: #001A14;         
+            --c-bg: #F4F1EA;           
+            --c-white: #FFFFFF;
+            --c-yellow: #FFC107;       
+            
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            --shadow-solid: 6px 6px 0px var(--c-dark);
+            --shadow-solid-hover: 10px 10px 0px var(--c-dark);
+            --shadow-solid-sm: 4px 4px 0px var(--c-dark);
+            
+            --border-thick: 3px solid var(--c-dark);
+            
+            --radius-box: 16px;
+            --radius-pill: 50px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--c-dark);
+            background-color: var(--c-bg);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--c-dark);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 32px;
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: var(--radius-pill);
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border: var(--border-thick);
+            box-shadow: var(--shadow-solid-sm);
+            background: var(--c-white);
+            color: var(--c-dark);
+        }
+
+        .btn-filled { background: var(--c-shrimp); color: var(--c-white); }
+
+        .btn:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: var(--shadow-solid-hover);
+        }
+        
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--c-dark);
+        }
+
+        .icon-box {
+            width: 80px; height: 80px;
+            background: var(--c-white);
+            border: var(--border-thick);
+            border-radius: 16px;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 20px;
+            box-shadow: 4px 4px 0px var(--c-dark);
+            transform: rotate(-3deg);
+            transition: transform 0.3s;
+        }
+        .icon-box svg { width: 45px; height: 45px; fill: var(--c-dark); }
+        .icon-box:hover { transform: rotate(5deg) scale(1.1); }
+
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background-color: var(--c-bg);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: var(--border-thick);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+
+        .navbar-brand {
+            display: flex; align-items: center; gap: 12px;
+            font-family: var(--font-display); font-size: 24px; font-weight: 800; text-transform: uppercase;
+        }
+        .navbar-brand img { height: 50px; filter: drop-shadow(2px 2px 0px var(--c-dark)); }
+
+        .nav-menu { display: flex; align-items: center; list-style: none; gap: 30px; }
+
+        .nav-link {
+            font-family: var(--font-display);
+            font-size: 16px; font-weight: 700; color: var(--c-dark);
+            padding: 8px 16px; border-radius: var(--radius-pill); border: 2px solid transparent; transition: all 0.2s;
+        }
+        .nav-link:hover, .nav-link.active { background: var(--c-lime); border: 2px solid var(--c-dark); box-shadow: 3px 3px 0px var(--c-dark); }
+
+        .lang-switcher {
+            display: flex; align-items: center; background: var(--c-white);
+            border: 2px solid var(--c-dark); border-radius: var(--radius-pill);
+            overflow: hidden; box-shadow: 3px 3px 0px var(--c-dark);
+        }
+
+        .lang-btn {
+            cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 14px;
+            padding: 8px 14px; transition: all 0.2s ease; color: var(--c-dark);
+        }
+        .lang-btn.active { background: var(--c-shrimp); color: var(--c-white); }
+
+        .navbar-toggler {
+            display: none; flex-direction: column; gap: 6px; background: var(--c-white);
+            border: 2px solid var(--c-dark); box-shadow: 3px 3px 0px var(--c-dark);
+            border-radius: 8px; cursor: pointer; padding: 8px; z-index: 1001;
+        }
+        .toggler-icon { width: 24px; height: 3px; background-color: var(--c-dark); border-radius: 3px; transition: all 0.3s ease; }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: var(--c-dark);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 26, 20, 0.75); 
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--c-yellow);
+            border: var(--border-thick);
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: var(--shadow-solid-sm);
+            margin-bottom: 30px;
+            transform: rotate(-3deg);
+            color: var(--c-dark);
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 7vw, 85px);
+            margin-bottom: 20px;
+            color: var(--c-white);
+            text-shadow: 4px 4px 0px var(--c-shrimp), 8px 8px 0px var(--c-dark);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: var(--c-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+
+        .emoji-shrimp-float {
+            position: absolute;
+            z-index: 2; 
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(4px 4px 0px var(--c-dark));
+            user-select: none;
+        }
+        .sf-1 { top: 15%; left: 10%; transform: rotate(35deg); animation-delay: 0s; font-size: 100px; }
+        .sf-2 { bottom: 15%; right: 15%; transform: rotate(-45deg); animation-delay: 2s; font-size: 140px; }
+        .sf-3 { top: 25%; right: 5%; transform: rotate(-110deg); animation-delay: 1s; font-size: 90px; }
+        .sf-4 { bottom: 25%; left: 5%; transform: rotate(120deg); animation-delay: 1.5s; font-size: 110px; }
+
+        .marquee-wrapper {
+            background: var(--c-shrimp);
+            border-top: var(--border-thick);
+            border-bottom: var(--border-thick);
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            transform: rotate(-2deg) scale(1.02);
+            margin: 40px 0;
+            z-index: 10;
+        }
+        .marquee-wrapper.alt { background: var(--c-lime); transform: rotate(2deg) scale(1.02); }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--c-dark);
+            text-transform: uppercase;
+        }
+        .marquee-content span { margin: 0 30px; display: inline-flex; align-items: center; gap: 15px; }
+
+        .specials-section {
+            padding: 80px 0;
+            background: var(--c-bg);
+        }
+
+        .specials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .special-card {
+            background: var(--c-white);
+            border: var(--border-thick);
+            border-radius: var(--radius-box);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-solid);
+            transition: transform 0.3s;
+        }
+        .special-card:hover { transform: translateY(-10px); }
+        .special-card h3 { font-size: 28px; margin-bottom: 15px; }
+
+        .c-beer-icon .icon-box svg { fill: #D97706; }
+
+        .about-section { padding: 80px 0; position: relative; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+        .about-text {
+            background: var(--c-yellow);
+            border: var(--border-thick);
+            padding: 40px;
+            border-radius: var(--radius-box);
+            box-shadow: var(--shadow-solid);
+            position: relative;
+        }
+        
+        .about-text::before {
+            content: ''; position: absolute;
+            top: -15px; left: 50%; transform: translateX(-50%);
+            width: 30px; height: 15px; background: var(--c-salsa);
+            border: 2px solid var(--c-dark); border-radius: 10px;
+        }
+
+        .section-title { font-size: 48px; margin-bottom: 25px; }
+        .section-title.centered { text-align: center; }
+        .about-text p { margin-bottom: 20px; font-weight: 600; }
+
+        .about-image {
+            width: 100%; height: 500px; object-fit: cover;
+            border: var(--border-thick); border-radius: var(--radius-box); box-shadow: var(--shadow-solid);
+        }
+
+        .gallery-section { padding: 80px 0; }
+        #gallery-container {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px; margin-top: 50px;
+        }
+        .gallery-item {
+            position: relative; border-radius: var(--radius-box); border: var(--border-thick);
+            overflow: hidden; aspect-ratio: 1 / 1; box-shadow: var(--shadow-solid); background: var(--c-white);
+        }
+        .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover .gallery-img { transform: scale(1.08); }
+
+        .info-section { padding: 80px 0; }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .info-item {
+            background: var(--c-lime); border: var(--border-thick); padding: 40px 20px;
+            border-radius: var(--radius-box); text-align: center; box-shadow: var(--shadow-solid);
+        }
+        .info-item:nth-child(2) { background: var(--c-white); transform: translateY(-15px); }
+        .info-item:nth-child(3) { background: var(--c-shrimp); }
+        .info-item:nth-child(3) h4, .info-item:nth-child(3) p, .info-item:nth-child(3) a { color: var(--c-white); }
+        
+        .info-item h4 { font-size: 24px; margin-bottom: 15px; }
+        .info-item p { font-weight: 700; }
+
+        .site-footer {
+            background-color: var(--c-dark); padding: 80px 0 40px; color: var(--c-white);
+            border-top: 5px solid var(--c-shrimp);
+        }
+
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; }
+        
+        .footer-logo-wrapper {
+            background: var(--c-white); border: var(--border-thick); padding: 20px;
+            border-radius: var(--radius-box); box-shadow: 6px 6px 0px var(--c-lime);
+            display: inline-block; margin-bottom: 25px; transform: rotate(-2deg);
+        }
+
+        .footer-brand img { max-width: 160px; }
+        .footer-title { color: var(--c-lime); font-size: 24px; margin-bottom: 25px; }
+        .footer-col p { margin-bottom: 15px; font-weight: 500; }
+
+        .social-container { display: flex; gap: 15px; margin-top: 30px; }
+        .social-link {
+            width: 48px; height: 48px; background: var(--c-white); border: 2px solid var(--c-white);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            color: var(--c-dark); transition: all 0.2s; box-shadow: 4px 4px 0px var(--c-shrimp);
+        }
+        .social-link:hover { background: var(--c-yellow); transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--c-shrimp); }
+
+        .copyright {
+            text-align: center; margin-top: 60px; padding-top: 25px;
+            border-top: 2px solid rgba(255,255,255,0.1); font-weight: 700;
+        }
+        .copyright a { color: var(--c-lime); text-decoration: underline; text-decoration-thickness: 2px; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); } 50% { transform: translateY(-20px) rotate(calc(var(--rot, 0deg) + 10deg)); } }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-toggler { display: flex; }
+            .nav-menu {
+                position: absolute; top: 100%; left: 0; right: 0; background-color: var(--c-bg);
+                flex-direction: column; padding: 20px; gap: 20px; border-bottom: var(--border-thick);
+                transform: translateY(-100%); opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: -1;
+            }
+            .nav-menu.active { transform: translateY(0); opacity: 1; visibility: visible; }
+            .hero-title { font-size: 45px; }
+            .specials-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .info-item:nth-child(2) { transform: none; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-container { justify-content: center; }
+            .footer-logo-wrapper { transform: none; }
+            .emoji-shrimp-float { display: none; } 
+        }
+    </style>
+    
+    <script>
+        window.MENU_TECH_STATE = {
+            "lang":"en",
+            "showReservations":false,
+            "showAbout":true,
+            "showPromo":false,
+            "showGallery":true,
+            "showCatering":false,
+            "showInfo":true,
+            "showDelivery":false,
+            "cuid":"0000000000000",
+            "ruid":"0000000000000",
+            "title":"Micheladas And Mariscos El Doctor",
+            "logoImg":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407420/MicheladasyMariscosElDoctorLOGO_1_r0whxd.png",
+            "heroAddress":"1220 S Sanford Ave, Sanford, FL 32771",
+            "heroImg":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407517/IMG-20260708-WA0034_1_csmfyp.jpg",
+            "aboutImg1":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407472/IMG-20260708-WA0032_z5tzvo.jpg",
+            "aboutImg2":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407472/IMG-20260708-WA0032_z5tzvo.jpg",
+            "gallery":[
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407485/IMG-20260708-WA0032_gqvomt.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407486/IMG-20260708-WA0031_llysxd.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407499/IMG-20260708-WA0035_wd2zsc.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1784407508/IMG-20260708-WA0036_wvuyqo.jpg"
+            ],
+            "socials":[
+                {"platform":"instagram","url":"https://www.instagram.com/micheladasandmariscos.eldoctor/"},
+                {"platform":"facebook","url":"https://web.facebook.com/micheladasandmariscoseldoctor"}
+            ],
+            "info":{
+                "hours":"Wednesday & Thursday: 11 AM – 9 PM\nFriday: 11 AM – 10 PM\nSaturday: 10 AM – 10 PM\nSunday: 10 AM – 9 PM\nMonday & Tuesday: Closed",
+                "phone":"407-807-7077",
+                "address":"1220 S Sanford Ave, Sanford, FL 32771"
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <svg style="display: none;">
+        <symbol id="icon-beer" viewBox="0 0 512 512">
+            <path d="M400 160V128c0-17.7-14.3-32-32-32H96C78.3 96 64 110.3 64 128v32c-35.3 0-64 28.7-64 64v96c0 35.3 28.7 64 64 64v32c0 17.7 14.3 32 32 32h272c17.7 0 32-14.3 32-32v-32c35.3 0 64-28.7 64-64v-96c0-35.3-28.7-64-64-64zm-32 256H96V128h272v288zm64-96c0 17.7-14.3 32-32 32v-160c17.7 0 32 14.3 32 32v96z"/>
+            <path d="M128 160h32v192h-32zm64 0h32v192h-32zm64 0h32v192h-32zm64 0h32v192h-32z"/>
+        </symbol>
+    </svg>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="navbar-brand">
+                <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1784407420/MicheladasyMariscosElDoctorLOGO_1_r0whxd.png" id="nav-brand-img" alt="Logo">
+                <span id="nav-brand-text" data-es="El Doctor" data-en="El Doctor">El Doctor</span>
+            </a>
+            
+            <button class="navbar-toggler" id="navbar-toggler" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#" class="nav-link active" data-es="Inicio" data-en="Home">Home</a></li>
+                <li><a href="#about-section" class="nav-link" data-es="Nosotros" data-en="About Us">About Us</a></li>
+                <li><a href="#gallery-section" class="nav-link" data-es="Menú" data-en="Menu">Menu</a></li>
+                <li><a href="#info-section" class="nav-link" data-es="Visítanos" data-en="Visit Us">Visit Us</a></li>
+                <li>
+                    <div class="lang-switcher">
+                        <span id="lang-es" class="lang-btn">ES</span>
+                        <span id="lang-en" class="lang-btn active">EN</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" id="hero-section">
+        <div class="emoji-shrimp-float sf-1" style="--rot: 35deg;">🦐</div>
+        <div class="emoji-shrimp-float sf-2" style="--rot: -45deg;">🦐</div>
+        <div class="emoji-shrimp-float sf-3" style="--rot: -110deg;">🦐</div>
+        <div class="emoji-shrimp-float sf-4" style="--rot: 120deg;">🦐</div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span style="font-size: 20px;">🦐</span>
+                    <span data-es="Especialidad 100% Fresca" data-en="100% Fresh Specialty">100% Fresh Specialty</span>
+                </div>
+                <h1 class="hero-title" data-es="El Sabor Tropical de la Baja" data-en="The Tropical Flavor of Baja">The Tropical Flavor of Baja</h1>
+                <p class="hero-subtitle" data-es="Camarones frescos y las micheladas que curan cualquier mal. Diseño único, sabor inigualable." data-en="Fresh shrimp and micheladas that cure any ill. Unique design, unmatched flavor.">Camarones frescos y las micheladas que curan cualquier mal. Diseño único, sabor inigualable.</p>
+                
+                <div class="hero-buttons">
+                    <a href="https://micheladasymariscoseldoctor.onlineordering.io/en/" class="btn btn-filled" target="_blank" id="hero-order-btn">
+                        <span data-es="Pedir en Línea" data-en="Order Online">Order Online</span>
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg>
+                    </a>
+
+                    <script src="https://www.fbgcdn.com/embedder/js/ewm2.js"></script>
+                    <script src="https://menutech.xyz/menutechUI.min.js"></script>
+                    <div id="hero-reservations-wrapper" style="display: none;">
+                        <menutech-reservations id="hero-reservations" cuid="0000000000000" ruid="0000000000000" background="#FF5E3A" color="#ffffff" data-glf-cuid="0000000000000" data-glf-ruid="0000000000000" data-glf-reservation="true"></menutech-reservations>
+                    </div>
+                    <script>setTimeout(() => { if(window.glfBindButtons) window.glfBindButtons(); }, 1000);</script>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
+            <span data-es="🦐 Camarones Frescos - 🍺 Micheladas Heladas - 🦐 Camarones Frescos - 🍺 Micheladas Heladas" data-en="🦐 Fresh Shrimp - 🍺 Ice Cold Micheladas - 🦐 Fresh Shrimp - 🍺 Ice Cold Micheladas">🦐 Camarones Frescos - 🍺 Micheladas Heladas - 🦐 Camarones Frescos - 🍺 Micheladas Heladas</span>
+            <span data-es="🦐 Camarones Frescos - 🍺 Micheladas Heladas - 🦐 Camarones Frescos - 🍺 Micheladas Heladas" data-en="🦐 Fresh Shrimp - 🍺 Ice Cold Micheladas - 🦐 Fresh Shrimp - 🍺 Ice Cold Micheladas">🦐 Camarones Frescos - 🍺 Micheladas Heladas - 🦐 Camarones Frescos - 🍺 Micheladas Heladas</span>
+        </div>
+    </div>
+
+    <section class="specials-section">
+        <div class="container">
+            <h2 class="section-title centered" data-es="Nuestros Pilares" data-en="Our Pillars">Our Pillars</h2>
+            <div class="specials-grid">
+                <div class="special-card">
+                    <div class="icon-box" style="font-size: 40px; line-height: 1;">🦐</div>
+                    <h3 data-es="Camarones" data-en="Fresh Shrimp">Fresh Shrimp</h3>
+                    <p data-es="Captura del día, preparados con el mejor sazón de la costa." data-en="Catch of the day, prepared with the best coastal seasoning.">Catch of the day, prepared con el mejor sazón de la costa.</p>
+                </div>
+                <div class="special-card c-beer-icon">
+                    <div class="icon-box"><svg><use href="#icon-beer"></use></svg></div>
+                    <h3 data-es="Micheladas" data-en="Micheladas">Micheladas</h3>
+                    <p data-es="Preparadas al instante, el remedio tropical perfecto." data-en="Freshly prepared, the perfect tropical remedy.">Preparadas al instante, el remedio tropical perfecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about-section">
+        <div class="container about-grid">
+            <img id="about-img-1" src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_800/v1784407472/IMG-20260708-WA0032_z5tzvo.jpg" alt="Vibe" class="about-image">
+            <div class="about-text">
+                <h2 class="section-title" id="about-title" data-es="La Experiencia El Doctor" data-en="The El Doctor Experience">The El Doctor Experience</h2>
+                <p id="about-p1" data-es="Nos alejamos de lo ordinario. Aquí los camarones son los reyes y el ambiente grita 'vacaciones'. Olvídate de los restaurantes aburridos." data-en="We move away from the ordinary. Here shrimp is king and the vibe screams 'vacation'. Forget boring restaurants.">Nos alejamos de lo ordinario. Aquí los camarones son los reyes y el ambiente grita 'vacaciones'. Olvídate de los restaurantes aburridos.</p>
+                <p id="about-p2" data-es="Ingredientes frescos, recetas sin pretensiones pero con mucho carácter. Nuestro objetivo es que comas rico, bebas mejor y regreses siempre." data-en="Fresh ingredients, unpretentious recipes but with a lot of character. Our goal is for you to eat well, drink better, and always come back.">Ingredientes frescos, recetas sin pretensiones pero con mucho carácter. Nuestro objetivo es que comas rico, bebas mejor y regreses siempre.</p>
+                <a href="#gallery-section" class="btn btn-filled" style="margin-top: 20px;">
+                    <span data-es="Ver Menú" data-en="See Menu">See Menu</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="gallery-section">
+        <div class="container">
+            <h2 class="section-title centered" id="gallery-title" data-es="Del Mar a tu Mesa" data-en="From the Sea to your Table">From the Sea to your Table</h2>
+            <div id="gallery-container">
+                <!-- Javascript Injection -->
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-wrapper alt">
+        <div class="marquee-content">
+            <span data-es="VISÍTANOS HOY MISMO - EL MEJOR AMBIENTE - VISÍTANOS HOY MISMO" data-en="VISIT US TODAY - THE BEST VIBE - VISIT US TODAY">VISÍTANOS HOY MISMO - EL MEJOR AMBIENTE - VISÍTANOS HOY MISMO</span>
+            <span data-es="VISÍTANOS HOY MISMO - EL MEJOR AMBIENTE - VISÍTANOS HOY MISMO" data-en="VISIT US TODAY - THE BEST VIBE - VISIT US TODAY">VISÍTANOS HOY MISMO - EL MEJOR AMBIENTE - VISÍTANOS HOY MISMO</span>
+        </div>
+    </div>
+
+    <section class="info-section" id="info-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon-box"><svg viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"></path></svg></div>
+                    <h4 data-es="Horarios" data-en="Hours">Hours</h4>
+                    <p id="info-hours">Wed - Thu: 11 AM – 9 PM<br>Fri - Sat: 11 AM – 10 PM<br>Sun: 10 AM – 9 PM<br>Mon - Tue: Closed</p>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box"><svg viewBox="0 0 256 256"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"></path></svg></div>
+                    <h4 data-es="Ubicación" data-en="Location">Location</h4>
+                    <p id="info-address">1220 S Sanford Ave<br>Sanford, FL 32771</p>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box"><svg viewBox="0 0 256 256"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.41-38.83-38.83l20.78-24.34a8.12,8.12,0,0,0,.56-.75,16,16,0,0,0,1.4-15.17l-.06-.13L97.62,33.66A16,16,0,0,0,82,24H39.87A15.92,15.92,0,0,0,24,39.87c0,119.5,96.63,216.13,216.13,216.13A15.92,15.92,0,0,0,256,240V197.87A16,16,0,0,0,240.34,182.19Z"></path></svg></div>
+                    <h4 data-es="Contacto" data-en="Contact">Contact</h4>
+                    <p><a href="tel:407-807-7077" id="info-phone">407-807-7077</a></p>
+                    <a href="https://micheladasymariscoseldoctor.onlineordering.io/en/" class="btn btn-filled" style="margin-top: 15px; padding: 10px 20px; font-size: 14px;" target="_blank">
+                        <span data-es="Pedir Ya" data-en="Order Now">Order Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <div class="footer-logo-wrapper">
+                        <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1784407420/MicheladasyMariscosElDoctorLOGO_1_r0whxd.png" alt="Logo Footer">
+                    </div>
+                    <p data-es="Camarones perfectos y micheladas inolvidables." data-en="Perfect shrimp and unforgettable micheladas.">Camarones perfectos y micheladas inolvidables.</p>
+                    <div id="social-icons" class="social-container">
+                        <!-- Dynamic socials -->
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title" data-es="Encuéntranos" data-en="Find Us">Find Us</h4>
+                    <p style="display:flex; gap:10px; align-items:center;">
+                        <svg width="24" height="24" fill="var(--c-lime)" viewBox="0 0 256 256"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Z"></path></svg>
+                        <span id="footer-address">1220 S Sanford Ave, Sanford, FL 32771</span>
+                    </p>
+                    <p style="display:flex; gap:10px; align-items:center;">
+                        <svg width="24" height="24" fill="var(--c-lime)" viewBox="0 0 256 256"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.41-38.83-38.83l20.78-24.34a8.12,8.12,0,0,0,.56-.75,16,16,0,0,0,1.4-15.17l-.06-.13L97.62,33.66A16,16,0,0,0,82,24H39.87A15.92,15.92,0,0,0,24,39.87c0,119.5,96.63,216.13,216.13,216.13A15.92,15.92,0,0,0,256,240V197.87A16,16,0,0,0,240.34,182.19Z"></path></svg>
+                        <span id="footer-phone">407-807-7077</span>
+                    </p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title" data-es="Horarios" data-en="Opening Hours">Opening Hours</h4>
+                    <p id="footer-hours">Wednesday & Thursday: 11 AM – 9 PM<br>Friday: 11 AM – 10 PM<br>Saturday: 10 AM – 10 PM<br>Sunday: 10 AM – 9 PM<br>Monday & Tuesday: Closed</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © <span id="copyright-year"></span> Micheladas And Mariscos El Doctor. <br> Crafted with passion by <a href="https://menutech.xyz/" target="_blank">Menutech</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const optimizeCloudinaryUrl = (url, options = {}) => {
+            if (!url || typeof url !== 'string' || !url.includes('res.cloudinary.com')) return url;
+            const [baseUrl, hash] = url.split('#');
+            if (!baseUrl.includes('/upload/')) return url;
+            const parts = baseUrl.split('/upload/');
+            let pathSegments = parts[1].split('/');
+            if (pathSegments.length > 1) {
+                const firstSegment = pathSegments[0];
+                if (/^v\d+$/.test(firstSegment) === false && (firstSegment.includes('_') || firstSegment.includes(','))) {
+                    pathSegments.shift();
+                }
+            }
+            const cleanPath = pathSegments.join('/');
+            let transformations = ['f_auto', 'q_auto:eco', 'dpr_auto'];
+            if (options.width) transformations.push(`w_${options.width}`);
+            if (options.height) transformations.push(`h_${options.height}`);
+            if (options.crop) transformations.push(`c_${options.crop}`);
+            return `${parts[0]}/upload/${transformations.join(',')}/${cleanPath}${hash ? '#' + hash : ''}`;
+        };
+
+        const SOCIAL_ICONS = {
+            instagram: `<svg width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg>`,
+            facebook: `<svg width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"></path></svg>`,
+            tiktok: `<svg width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M184,88v25.29A64.13,64.13,0,0,1,209.71,139a8,8,0,0,1-8,14H184v47A56,56,0,1,1,128,144a8,8,0,0,1,0,16,40,40,0,1,0,40,40V32a8,8,0,0,1,16,0,48.05,48.05,0,0,0,48,48,8,8,0,0,1,0,16h-3.41A64.19,64.19,0,0,1,184,88Z"></path></svg>`
+        };
+
+        let currentLang = 'en';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            
+            const esBtn = document.getElementById('lang-es');
+            const enBtn = document.getElementById('lang-en');
+            if(esBtn && enBtn) {
+                if (lang === 'es') {
+                    esBtn.classList.add('active'); enBtn.classList.remove('active');
+                } else {
+                    enBtn.classList.add('active'); esBtn.classList.remove('active');
+                }
+            }
+
+            document.querySelectorAll('[data-es]').forEach(el => {
+                const targetText = el.getAttribute(`data-${lang}`);
+                if (targetText && targetText.trim() !== '') {
+                    el.innerHTML = targetText.replace(/\n/g, '<br>');
+                }
+            });
+        }
+
+        function updateUI(data) {
+            if (!data) return;
+
+            if (data.lang) applyLanguage(data.lang);
+
+            const sections = { 'about-section': data.showAbout !== false, 'gallery-section': data.showGallery !== false, 'info-section': data.showInfo !== false };
+            Object.keys(sections).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = sections[id] ? 'block' : 'none';
+            });
+
+            if (data.info) {
+                const hHours = document.getElementById('info-hours');
+                const fHours = document.getElementById('footer-hours');
+                if (hHours && data.info.hours) hHours.innerHTML = data.info.hours.replace(/\n/g, '<br>');
+                if (fHours && data.info.hours) fHours.innerHTML = data.info.hours.replace(/\n/g, '<br>');
+                
+                const hPhone = document.getElementById('info-phone');
+                const fPhone = document.getElementById('footer-phone');
+                if (hPhone && data.info.phone) hPhone.textContent = data.info.phone;
+                if (fPhone && data.info.phone) fPhone.textContent = data.info.phone;
+
+                const hAddress = document.getElementById('info-address');
+                const fAddress = document.getElementById('footer-address');
+                if (hAddress && data.info.address) hAddress.textContent = data.info.address;
+                if (fAddress && data.info.address) fAddress.textContent = data.info.address;
+            }
+
+            if (data.heroImg) {
+                const heroSection = document.getElementById('hero-section');
+                if (heroSection) heroSection.style.backgroundImage = `url('${optimizeCloudinaryUrl(data.heroImg, { width: 1920 })}')`;
+            }
+
+            if (data.aboutImg1) {
+                const img1 = document.getElementById('about-img-1');
+                if (img1) img1.src = optimizeCloudinaryUrl(data.aboutImg1, { width: 800 });
+            }
+            
+            if (data.socials) {
+                const container = document.getElementById('social-icons');
+                if (container) {
+                    container.innerHTML = data.socials.map(s => {
+                        let platform = s.platform.toLowerCase();
+                        if (platform === 'twitter' || s.url.includes('tiktok')) platform = 'tiktok';
+                        return `
+                        <a href="${s.url}" target="_blank" class="social-link" aria-label="${platform}">
+                            ${SOCIAL_ICONS[platform] || SOCIAL_ICONS['facebook']}
+                        </a>`;
+                    }).join('');
+                }
+            }
+
+            if (data.gallery) {
+                const container = document.getElementById('gallery-container');
+                if (container) {
+                    container.innerHTML = data.gallery.map(img => `
+                        <div class="gallery-item">
+                            <img src="${optimizeCloudinaryUrl(img, { width: 600, height: 600, crop: 'fill' })}" class="gallery-img" loading="lazy" alt="Platillo">
+                        </div>
+                    `).join('');
+                }
+            }
+
+            const cuid = data.cuid || '';
+            const ruid = data.ruid || '';
+            const resWrapper = document.getElementById('hero-reservations-wrapper');
+            if (resWrapper) {
+                resWrapper.style.display = (data.showReservations !== false) ? 'inline-block' : 'none';
+                const resBtn = resWrapper.querySelector('menutech-reservations');
+                if (resBtn) {
+                    const newResBtn = document.createElement('menutech-reservations');
+                    newResBtn.setAttribute('cuid', cuid);
+                    newResBtn.setAttribute('ruid', ruid);
+                    newResBtn.setAttribute('background', '#FF5E3A');
+                    newResBtn.setAttribute('color', '#ffffff');
+                    newResBtn.setAttribute('data-glf-cuid', cuid);
+                    newResBtn.setAttribute('data-glf-ruid', ruid);
+                    newResBtn.setAttribute('data-glf-reservation', 'true');
+                    resBtn.parentNode.replaceChild(newResBtn, resBtn);
+                }
+            }
+
+            if (window.glfBindButtons) window.glfBindButtons();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('copyright-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            document.getElementById('lang-es')?.addEventListener('click', () => applyLanguage('es'));
+            document.getElementById('lang-en')?.addEventListener('click', () => applyLanguage('en'));
+
+            if (window.MENU_TECH_STATE) { updateUI(window.MENU_TECH_STATE); }
+            applyLanguage(currentLang);
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'UPDATE_CONTENT') { updateUI(event.data.data); }
+        });
+
+        const navbarToggler = document.getElementById('navbar-toggler');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if(navbarToggler) {
+            navbarToggler.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icons = navbarToggler.querySelectorAll('.toggler-icon');
+                if (navMenu.classList.contains('active')) {
+                    icons[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    icons[1].style.opacity = '0';
+                    icons[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+                } else {
+                    icons.forEach(i => { i.style.transform = 'none'; i.style.opacity = '1'; });
+                }
+            });
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icons = document.querySelectorAll('.toggler-icon');
+                icons.forEach(i => { i.style.transform = 'none'; i.style.opacity = '1'; });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
+                navbar.style.padding = '8px 0';
+            } else {
+                navbar.style.boxShadow = 'none';
+                navbar.style.padding = '15px 0';
+            }
+        });
+    </script>
+</body>
+</html>
